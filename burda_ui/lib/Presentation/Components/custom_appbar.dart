@@ -21,15 +21,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                    color: Colors.grey.shade300,
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        fit: BoxFit.cover, image: NetworkImage(context.watch<HomeProvider>().currenUser.imageUrl))),
-               
+              Stack(
+                alignment: Alignment.bottomRight,
+                children: [
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                        color: Colors.grey.shade300,
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.cover, image: NetworkImage(context.watch<HomeProvider>().currenUser.imageUrl))),
+                   
+                  ),
+                  Positioned(
+                    right: 4,
+                    child: Container(
+                      height: 8,
+                      width: 8,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  )
+                ],
               ),
               Row(
                 children: [

@@ -1,4 +1,4 @@
-import 'package:burda_ui/Presentation/Screens/home_page.dart';
+import 'package:burda_ui/Presentation/Screens/splash_page.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,12 +20,12 @@ class MyApp extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Burda App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: const HomePage(),
+      home: const SplashPage(),
     );
   }
 }

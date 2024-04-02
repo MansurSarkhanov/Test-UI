@@ -36,18 +36,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _homeBody(HomeProvider provider) {
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       itemCount: provider.users.length,
       itemBuilder: (context, index) {
         return Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: ListTile(
             leading: Container(
-              decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.grey.shade200),
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Icon(Icons.person),
-              ),
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.grey.shade200,
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        provider.users[index].imageUrl,
+                      ))),
+           
             ),
             title: Text(
               provider.users[index].name,

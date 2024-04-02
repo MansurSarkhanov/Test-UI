@@ -5,4 +5,6 @@ final class IconPath {
   static const String home = 'assets/Icons/home.svg';
   static const String search = 'assets/Icons/search.svg';
   static const String notifi = 'assets/Icons/notification.svg';
+  static const String chat = 'assets/Icons/chat.svg';
+
 }

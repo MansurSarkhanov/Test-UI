@@ -1,66 +1,55 @@
 import 'package:burda_ui/Core/Constants/paths.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatelessWidget {
+import '../Components/custom_appbar.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late TabController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = TabController(length: 5, vsync: this);
+  }
+
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-      backgroundColor: Colors.white,
-      elevation: 2,
-      toolbarHeight: 170,
-      title: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(color: Colors.grey.shade300, shape: BoxShape.circle),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.person),
-                ),
-              ),
-              Row(
-                children: [
-                  SvgPicture.asset(IconPath.logo),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    "burda",
-                    style: TextStyle(color: Colors.black),
-                  )
-                ],
-              ),
-              SvgPicture.asset(IconPath.notifi)
-            ],
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey.shade200),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Gizli rejmi aktivlesdir",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  CupertinoSwitch(value: false, onChanged: (value) {})
-                ],
-              ),
-            ),
-          )
-        ],
+      appBar: const CustomAppBar(),
+      bottomNavigationBar:
+          TabBar(indicatorColor: Colors.transparent, labelColor: Colors.black, controller: controller, tabs: [
+        Tab(
+          text: 'Home',
+          icon: SvgPicture.asset(IconPath.home),
+        ),
+        Tab(
+          text: 'Search',
+          icon: SvgPicture.asset(IconPath.search),
+        ),
+        Tab(
+          text: 'Story',
+          icon: SvgPicture.asset(IconPath.add),
+        ),
+        Tab(
+          text: 'Discover',
+          icon: SvgPicture.asset(IconPath.fire),
+        ),
+        Tab(
+          text: 'Chat',
+          icon: SvgPicture.asset(IconPath.chat),
+        )
+      ]),
+      body: const Column(
+        children: [],
       ),
-    ));
+    );
   }
 }

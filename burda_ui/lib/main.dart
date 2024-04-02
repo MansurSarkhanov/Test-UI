@@ -1,7 +1,6 @@
+import 'package:burda_ui/Presentation/Screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'Presentation/Screens/splash_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,9 +17,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
-      home: const SplashPage(),
+      home: const HomePage(),
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:burda_ui/Core/Constants/paths.dart';
+import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -55,7 +57,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     "Gizli rejmi aktivlesdir",
                     style: TextStyle(color: Colors.black),
                   ),
-                  CupertinoSwitch(value: false, onChanged: (value) {})
+                  CupertinoSwitch(
+                      value: context.watch<HomeProvider>().isVisible,
+                      onChanged: (value) {
+                        context.read<HomeProvider>().changeVisible(value);
+                      })
                 ],
               ),
             ),

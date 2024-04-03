@@ -1,8 +1,59 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
 import '../../Core/Constants/colors.dart';
 import '../../Core/Constants/sized_box.dart';
 import 'Buttons/sheet_answer_button.dart';
+
+void decisionSheet(context, String title, bool isSmall) {
+  showModalBottomSheet(
+    context: context,
+    builder: (context) {
+      return Container(
+        color: Colors.white,
+        height: isSmall ? 180 : 210,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: const TextStyle(fontSize: 28),
+              ),
+              sizedBoxH(20),
+              Row(
+                children: [
+                  SheetAnswerButton(
+                    isYes: false,
+                    onPress: () {},
+                    text: "Legv et",
+                  ),
+                  sizedBoxW(16),
+                  SheetAnswerButton(
+                    isYes: true,
+                    onPress: () {
+                      Navigator.pop(context);
+                      print('sdfs0');
+                      Flushbar(
+                        backgroundColor: const Color(0xFF2B2B2B),
+                        margin: const EdgeInsets.all(24),
+                        borderRadius: BorderRadius.circular(12),
+                        duration: const Duration(seconds: 2),
+                        flushbarPosition: FlushbarPosition.BOTTOM,
+                        message: 'Bildirişlər bağlanıldı',
+                      ).show(context);
+                    },
+                    text: "Beli, bagla",
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      );
+    },
+  );
+}
 
 void selectOperationMenu(context, detail) {
   final offset = detail.globalPosition;
@@ -19,42 +70,7 @@ void selectOperationMenu(context, detail) {
       PopupMenuItem(
         onTap: () async {
           Navigator.of(context).pop();
-          showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Container(
-                color: Colors.white,
-                height: 210,
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Bu şəxs üçün bildirişləri bağlamaq istədiyinizdən əminsiniz?',
-                        style: TextStyle(fontSize: 28),
-                      ),
-                      sizedBoxH(20),
-                      Row(
-                        children: [
-                          SheetAnswerButton(
-                            isYes: false,
-                            onPress: () {},
-                            text: "Legv et",
-                          ),
-                          sizedBoxW(16),
-                          SheetAnswerButton(
-                            isYes: true,
-                            onPress: () {},
-                            text: "Beli, bagla",
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              );
-            },
-          );
+          decisionSheet(context, "Bu şəxs üçün bildirişləri bağlamaq istədiyinizdən əminsiniz?", false);
         },
         value: 1,
         child: Row(
@@ -66,8 +82,9 @@ void selectOperationMenu(context, detail) {
         ),
       ),
       PopupMenuItem(
-        onTap: () {
+        onTap: () async {
           Navigator.of(context).pop();
+          decisionSheet(context, "Bu şəxsi bloklamaq istədiyinizdən əminsiniz?", true);
         },
         value: 2,
         child: Row(

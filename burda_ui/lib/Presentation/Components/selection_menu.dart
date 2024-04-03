@@ -11,7 +11,6 @@ import '../../Core/Constants/sized_box.dart';
 import 'Buttons/sheet_answer_button.dart';
 
 void decisionSheet(context, String title, bool isSmall) {
-  print(MediaQuery.of(context).size.height);
   showModalBottomSheet(
     context: context,
     builder: (context) {
@@ -33,7 +32,9 @@ void decisionSheet(context, String title, bool isSmall) {
                 children: [
                   SheetAnswerButton(
                     isYes: false,
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.pop(context);
+                    },
                     text: "Legv et",
                   ),
                   sizedBoxW(16),
@@ -111,13 +112,17 @@ void selectOperationMenu(context, detail) {
             context: context,
             builder: (context) {
               return Container(
-                height: mediaQuery(context, height: 0.7),
+                height: mediaQuery(context, height: 0.73),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 16, right: 16),
+                  padding: const EdgeInsets.only(
+                    top: 8.0,
+                    left: 16,
+                    right: 16,
+                  ),
                   child: Column(
                     children: [
                       const SheetHeader(),
@@ -162,6 +167,7 @@ void selectOperationMenu(context, detail) {
                           },
                         ),
                       ),
+                     
                       ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);

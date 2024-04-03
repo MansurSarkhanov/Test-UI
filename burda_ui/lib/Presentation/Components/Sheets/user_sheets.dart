@@ -11,13 +11,13 @@ void showSheet(context, HomeProvider provider, int index) {
     context: context,
     builder: (context) {
       return Container(
-        height: MediaQuery.of(context).size.height * 0.65,
+        height: MediaQuery.of(context).size.height * 0.62,
         width: double.infinity,
         decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 16, right: 16),
+          padding: const EdgeInsets.only(top: 8.0, left: 16, right: 16, bottom: 16),
           child: Column(
             children: [
               Container(
@@ -46,17 +46,17 @@ void showSheet(context, HomeProvider provider, int index) {
                 ],
               ),
               sizedBoxH(16),
-              Container(
-                height: 120,
-                width: 120,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(fit: BoxFit.cover, image: NetworkImage(provider.users[index].imageUrl))),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(fit: BoxFit.contain, image: NetworkImage(provider.users[index].imageUrl))),
+                ),
               ),
               sizedBoxH(8),
               Text(
                 provider.users[index].name,
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
               ),
               sizedBoxH(4),
               Text(
@@ -82,7 +82,7 @@ void showSheet(context, HomeProvider provider, int index) {
                 ),
               ),
               const Divider(),
-              sizedBoxH(24),
+              sizedBoxH(12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

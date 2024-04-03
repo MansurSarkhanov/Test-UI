@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:burda_ui/Core/Constants/query.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,21 +11,24 @@ import '../../Core/Constants/sized_box.dart';
 import 'Buttons/sheet_answer_button.dart';
 
 void decisionSheet(context, String title, bool isSmall) {
+  print(MediaQuery.of(context).size.height);
   showModalBottomSheet(
     context: context,
     builder: (context) {
       return Container(
         color: Colors.white,
-        height: isSmall ? 180 : 210,
+        height: isSmall ? MediaQuery.of(context).size.height * .21 : MediaQuery.of(context).size.height * .25,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              Text(
-                title,
-                style: const TextStyle(fontSize: 28),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(fontSize: 28),
+                ),
               ),
-              sizedBoxH(20),
+              sizedBoxH(16),
               Row(
                 children: [
                   SheetAnswerButton(
@@ -66,8 +70,8 @@ void selectOperationMenu(context, detail) {
     context: context,
     position: RelativeRect.fromLTRB(
       offset.dx,
-      600,
-      MediaQuery.of(context).size.width - offset.dx,
+      mediaQuery(context, height: .72),
+      16,
       MediaQuery.of(context).size.height - offset.dy,
     ),
     items: [
@@ -107,7 +111,7 @@ void selectOperationMenu(context, detail) {
             context: context,
             builder: (context) {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: mediaQuery(context, height: 0.7),
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -166,17 +170,17 @@ void selectOperationMenu(context, detail) {
                               context: context,
                               builder: (context) {
                                 return Container(
-                                  height: 320,
+                                  height: mediaQuery(context, height: .39),
                                   color: Colors.white,
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
                                     child: Column(
                                       children: [
                                         const SheetHeader(),
+                                        sizedBoxH(12),
                                         Image.asset(
                                           IconPath.success,
-                                          width: 100,
-                                          height: 100,
+                                          height: mediaQuery(context, height: .13),
                                         ),
                                         sizedBoxH(16),
                                         const Text(
@@ -184,7 +188,12 @@ void selectOperationMenu(context, detail) {
                                           style: TextStyle(fontSize: 24),
                                         ),
                                         sizedBoxH(24),
-                                        SheetAnswerButton(text: "Bağla", onPress: () {}, isYes: false)
+                                        SheetAnswerButton(
+                                            text: "Bağla",
+                                            onPress: () {
+                                              Navigator.pop(context);
+                                            },
+                                            isYes: false)
                                       ],
                                     ),
                                   ),
@@ -230,11 +239,6 @@ void selectOperationMenu(context, detail) {
     elevation: 8.0,
   );
 }
-
-
-
-
-
 
 class SheetHeader extends StatelessWidget {
   const SheetHeader({super.key});

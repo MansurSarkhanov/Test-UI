@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../Core/Constants/colors.dart';
+import '../../Core/Constants/paths.dart';
 import '../../Core/Constants/sized_box.dart';
 import 'Buttons/sheet_answer_button.dart';
 
@@ -115,31 +116,7 @@ void selectOperationMenu(context, detail) {
                   padding: const EdgeInsets.only(top: 8.0, left: 16, right: 16),
                   child: Column(
                     children: [
-                      Container(
-                        width: 30,
-                        height: 4,
-                        decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(8)),
-                      ),
-                      sizedBoxH(8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            "Şikayət et",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
-                          ),
-                          InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: Container(
-                                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFF7F7F7)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: Icon(Icons.close),
-                                  )))
-                        ],
-                      ),
+                      const SheetHeader(),
                       sizedBoxH(16),
                       const Row(
                         children: [
@@ -184,6 +161,36 @@ void selectOperationMenu(context, detail) {
                       ElevatedButton(
                           onPressed: () {
                             Navigator.pop(context);
+                            showModalBottomSheet(
+                              isScrollControlled: true,
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                  height: 320,
+                                  color: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      children: [
+                                        const SheetHeader(),
+                                        Image.asset(
+                                          IconPath.success,
+                                          width: 100,
+                                          height: 100,
+                                        ),
+                                        sizedBoxH(16),
+                                        const Text(
+                                          'Şikayətin göndərildi',
+                                          style: TextStyle(fontSize: 24),
+                                        ),
+                                        sizedBoxH(24),
+                                        SheetAnswerButton(text: "Bağla", onPress: () {}, isYes: false)
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.orangeColor,
@@ -222,4 +229,46 @@ void selectOperationMenu(context, detail) {
     ],
     elevation: 8.0,
   );
+}
+
+
+
+
+
+
+class SheetHeader extends StatelessWidget {
+  const SheetHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          width: 30,
+          height: 4,
+          decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(8)),
+        ),
+        sizedBoxH(8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Şikayət et",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                    decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFF7F7F7)),
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.close),
+                    )))
+          ],
+        ),
+      ],
+    );
+  }
 }

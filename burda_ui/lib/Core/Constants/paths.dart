@@ -7,4 +7,8 @@ final class IconPath {
   static const String notifi = 'assets/Icons/notification.svg';
   static const String chat = 'assets/Icons/chat.svg';
 
+  //Png
+  static const String success = 'assets/Images/success.png';
+
+
 }

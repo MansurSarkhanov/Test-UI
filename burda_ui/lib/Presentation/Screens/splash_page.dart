@@ -33,7 +33,7 @@ class SplashPage extends StatelessWidget {
                   width: 50,
                 ),
                 const Text(
-                  "Loding...",
+                  "Loading...",
                   style: TextStyle(fontWeight: FontWeight.w500),
                 )
               ],

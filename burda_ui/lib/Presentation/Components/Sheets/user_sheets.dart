@@ -1,3 +1,4 @@
+import 'package:burda_ui/Core/Constants/query.dart';
 import 'package:burda_ui/Presentation/Animation/bounce_animation.dart';
 import 'package:burda_ui/Presentation/Components/selection_menu.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
@@ -12,7 +13,7 @@ void showSheet(context, HomeProvider provider, int index) {
     context: context,
     builder: (context) {
       return Container(
-        height: MediaQuery.of(context).size.height * 0.62,
+        height: mediaQuery(context, height: 0.62),
         width: double.infinity,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -48,7 +49,6 @@ void showSheet(context, HomeProvider provider, int index) {
                             )))
                   ],
                 ),
-                sizedBoxH(16),
                 Expanded(
                   child: BounceFromBottomAnimation(
                     delay: 3,
@@ -79,7 +79,7 @@ void showSheet(context, HomeProvider provider, int index) {
                 BounceFromBottomAnimation(
                   delay: 3,
                   child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 24),
+                    margin: const EdgeInsets.symmetric(vertical: 12),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: const Color(0xFFFDEAE8)),
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),

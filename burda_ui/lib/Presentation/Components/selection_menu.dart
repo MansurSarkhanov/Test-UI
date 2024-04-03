@@ -16,7 +16,7 @@ void decisionSheet(context, String title, bool isSmall) {
     builder: (context) {
       return Container(
         color: Colors.white,
-        height: isSmall ? MediaQuery.of(context).size.height * .21 : MediaQuery.of(context).size.height * .25,
+        height: isSmall ? MediaQuery.of(context).size.height * .25 : MediaQuery.of(context).size.height * .3,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -176,7 +176,7 @@ void selectOperationMenu(context, detail) {
                               context: context,
                               builder: (context) {
                                 return Container(
-                                  height: mediaQuery(context, height: .39),
+                                  height: mediaQuery(context, height: .43),
                                   color: Colors.white,
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),
@@ -258,7 +258,6 @@ class SheetHeader extends StatelessWidget {
           height: 4,
           decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(8)),
         ),
-        sizedBoxH(8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

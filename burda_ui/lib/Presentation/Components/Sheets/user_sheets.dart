@@ -1,6 +1,8 @@
+import 'package:burda_ui/Presentation/Components/selection_menu.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Core/Constants/colors.dart';
 import '../../../Core/Constants/sized_box.dart';
 
 void showSheet(context, HomeProvider provider, int index) {
@@ -100,7 +102,7 @@ void showSheet(context, HomeProvider provider, int index) {
                         child: ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFFEE6A57),
+                                backgroundColor: AppColors.orangeColor,
                                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
                             child: const Center(
                                 child: Padding(
@@ -112,7 +114,10 @@ void showSheet(context, HomeProvider provider, int index) {
                             ))),
                       ),
                       sizedBoxW(12),
-                      InkWell(
+                      GestureDetector(
+                        onTapDown: (detail) {
+                          selectOperationMenu(context, detail);
+                        },
                         child: Container(
                           decoration: BoxDecoration(shape: BoxShape.circle, border: Border.all(color: Colors.grey)),
                           child: const Padding(

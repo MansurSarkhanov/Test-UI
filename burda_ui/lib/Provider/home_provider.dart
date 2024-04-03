@@ -16,7 +16,7 @@ class HomeProvider extends ChangeNotifier {
         name: "Sevinc Alieva, 23",
         pleace: "Yaxinlidaq",
         imageUrl:
-            'https://img.freepik.com/free-photo/young-blonde-woman-wearing-striped-shirt_273609-14416.jpg?w=1800&t=st=1712091566~exp=1712092166~hmac=a87e59e1ed79990a8e69e6cdeb62bfd21d52578c60bb6283efcac6f02e797025'),
+            'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?w=1800&t=st=1712091263~exp=1712091863~hmac=c1994e39999b6206d9fe256cd0516e75bbefe1d77f5f73d14187d44e34cf25ce'),
     UserModel(
         favorites: 215,
         name: "Gunel M-va, 4",

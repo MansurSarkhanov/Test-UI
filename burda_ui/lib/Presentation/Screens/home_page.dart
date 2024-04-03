@@ -1,4 +1,5 @@
 import 'package:burda_ui/Core/Constants/paths.dart';
+import 'package:burda_ui/Presentation/Animation/bounce_animation.dart';
 import 'package:burda_ui/Presentation/Components/Sheets/user_sheets.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         backgroundColor: const Color(0xFFF2F2F2),
         appBar: const CustomAppBar(),
         bottomNavigationBar: const CustomNavBar(),
-        body: _homeBody(provider),
+        body: BounceFromBottomAnimation(delay: 2, child: _homeBody(provider)),
       );
     });
   }

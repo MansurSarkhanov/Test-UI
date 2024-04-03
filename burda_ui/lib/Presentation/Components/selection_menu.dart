@@ -182,7 +182,9 @@ void selectOperationMenu(context, detail) {
                         ),
                       ),
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.orangeColor,
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),

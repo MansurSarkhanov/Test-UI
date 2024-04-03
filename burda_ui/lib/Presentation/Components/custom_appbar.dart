@@ -1,4 +1,5 @@
 import 'package:burda_ui/Core/Constants/paths.dart';
+import 'package:burda_ui/Presentation/Animation/bounce_animation.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -21,45 +22,54 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover, image: NetworkImage(context.watch<HomeProvider>().currenUser.imageUrl))),
-                   
-                  ),
-                  Positioned(
-                    right: 4,
-                    child: Container(
-                      height: 8,
-                      width: 8,
-                      decoration: const BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
+              BounceFromBottomAnimation(
+                delay: 2,
+                isLeft: true,
+                isVertical: false,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(context.watch<HomeProvider>().currenUser.imageUrl))),
                     ),
-                  )
-                ],
+                    Positioned(
+                      right: 4,
+                      child: Container(
+                        height: 8,
+                        width: 8,
+                        decoration: const BoxDecoration(
+                          color: Colors.green,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
-              Row(
-                children: [
-                  SvgPicture.asset(IconPath.logo),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Text(
-                    "burda",
-                    style: TextStyle(color: Colors.black),
-                  )
-                ],
+              BounceFromBottomAnimation(
+                delay: 2,
+                isTop: true,
+                child: Row(
+                  children: [
+                    SvgPicture.asset(IconPath.logo),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Text(
+                      "burda",
+                      style: TextStyle(color: Colors.black),
+                    )
+                  ],
+                ),
               ),
-              SvgPicture.asset(IconPath.notifi)
+              BounceFromBottomAnimation(isVertical: false, delay: 2, child: SvgPicture.asset(IconPath.notifi))
             ],
           ),
           const SizedBox(

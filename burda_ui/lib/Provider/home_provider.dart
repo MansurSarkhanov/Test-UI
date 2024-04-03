@@ -1,6 +1,8 @@
 import 'package:burda_ui/Models/user_model.dart';
 import 'package:flutter/material.dart';
 
+import '../Models/complaint_model.dart';
+
 class HomeProvider extends ChangeNotifier {
   bool isVisible = false;
   UserModel currenUser = UserModel(
@@ -12,7 +14,6 @@ class HomeProvider extends ChangeNotifier {
   List<UserModel> users = [
     UserModel(
         favorites: 755,
-
         name: "Sevinc Alieva, 23",
         pleace: "Yaxinlidaq",
         imageUrl:
@@ -30,6 +31,20 @@ class HomeProvider extends ChangeNotifier {
         imageUrl:
             'https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?w=1800&t=st=1712091537~exp=1712092137~hmac=8ceb595260592abe2d00bdbf4bb7889815d0460bd87929a1360283348d3cf815'),
   ];
+  List<ComplaintModel> complaintList = [
+    ComplaintModel(isSelected: false, title: 'Profil fotosunda çılpaqlıq, intim və etik olmayan məzmun var'),
+    ComplaintModel(isSelected: false, title: 'İstifadəçi adında uyğun olmayan ifadələr, söyüş, təhqir var'),
+    ComplaintModel(isSelected: false, title: 'Mesajlarında kobudluq, əxlaqsız təklif və söyüş var'),
+    ComplaintModel(isSelected: false, title: 'İstifadəçi məni konum (?) bilgisi ilə təqib edir'),
+    ComplaintModel(isSelected: false, title: "Məni və ya başqalarını təhqir edir"),
+    ComplaintModel(isSelected: false, title: 'Mən və başqa birinin foto və ad soyadını istifadə edir'),
+    ComplaintModel(isSelected: false, title: "Spam / Fırıldaqçılıq"),
+    ComplaintModel(isSelected: false, title: "Başqa səbəb"),
+  ];
+  void selectComplaint(bool? value, index) {
+    complaintList[index].isSelected = value ?? false;
+    notifyListeners();
+  }
 
   void changeVisible(bool value) {
     isVisible = value;

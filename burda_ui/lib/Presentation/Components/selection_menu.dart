@@ -1,5 +1,8 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:burda_ui/Provider/home_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../Core/Constants/colors.dart';
 import '../../Core/Constants/sized_box.dart';
@@ -98,6 +101,106 @@ void selectOperationMenu(context, detail) {
       PopupMenuItem(
         onTap: () {
           Navigator.of(context).pop();
+          showModalBottomSheet(
+            isScrollControlled: true,
+            context: context,
+            builder: (context) {
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.7,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, left: 16, right: 16),
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 30,
+                        height: 4,
+                        decoration: BoxDecoration(color: Colors.grey.shade400, borderRadius: BorderRadius.circular(8)),
+                      ),
+                      sizedBoxH(8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            "Şikayət et",
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Color(0xFFF7F7F7)),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Icon(Icons.close),
+                                  )))
+                        ],
+                      ),
+                      sizedBoxH(16),
+                      const Row(
+                        children: [
+                          Text(
+                            "Səbəb seçin",
+                            style: TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                      sizedBoxH(12),
+                      Expanded(
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: context.watch<HomeProvider>().complaintList.length,
+                          itemBuilder: (_, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CupertinoCheckbox(
+                                      activeColor: AppColors.orangeColor,
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                      value: context.watch<HomeProvider>().complaintList[index].isSelected,
+                                      onChanged: (value) {
+                                        context.read<HomeProvider>().selectComplaint(value, index);
+                                      }),
+                                  Expanded(
+                                    child: Text(
+                                      context.watch<HomeProvider>().complaintList[index].title,
+                                      style: const TextStyle(fontSize: 16),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.orangeColor,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                          child: const Center(
+                              child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16.0),
+                            child: Text(
+                              "Göndər",
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                          ))),
+                      sizedBoxH(16)
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         },
         value: 3,
         child: Row(

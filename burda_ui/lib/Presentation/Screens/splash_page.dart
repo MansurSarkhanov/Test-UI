@@ -1,4 +1,5 @@
 import 'package:burda_ui/Core/Constants/paths.dart';
+import 'package:burda_ui/Core/Constants/sized_box.dart';
 import 'package:burda_ui/Presentation/Screens/home_page.dart';
 import 'package:burda_ui/Provider/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class SplashPage extends StatelessWidget {
                   IconPath.logo,
                   width: 50,
                 ),
+                sizedBoxH(12),
                 const Text(
                   "Loading...",
                   style: TextStyle(fontWeight: FontWeight.w500),

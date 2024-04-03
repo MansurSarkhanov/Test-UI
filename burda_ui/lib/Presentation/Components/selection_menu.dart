@@ -176,7 +176,8 @@ void selectOperationMenu(context, detail) {
                               context: context,
                               builder: (context) {
                                 return Container(
-                                  height: mediaQuery(context, height: .43),
+                                  height: mediaQuery(context,
+                                      height: (MediaQuery.of(context).size.height < 800) ? .43 : .39),
                                   color: Colors.white,
                                   child: Padding(
                                     padding: const EdgeInsets.all(16.0),

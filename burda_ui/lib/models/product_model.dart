@@ -1,7 +1,7 @@
-class ProductModel {
+class ProductModel<T> {
   int? id;
   String? title;
-  double? price;
+  T? price;
   String? description;
   String? category;
   String? image;
@@ -34,8 +34,8 @@ class ProductModel {
   }
 }
 
-class RatingModel {
-  double? rate;
+class RatingModel<T> {
+  T? rate;
   int? count;
 
   RatingModel({this.rate, this.count});

@@ -1,8 +1,8 @@
 import 'package:burda_ui/bloc/home/home_notifier.dart';
-import 'package:burda_ui/core/constants/paths.dart';
 import 'package:burda_ui/presentation/animation/bounce_animation.dart';
+import 'package:burda_ui/presentation/pages/home/view/home_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -19,16 +19,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     controller = TabController(length: 5, vsync: this);
+    context.read<HomeNotifier>().fetchUserInfo();
+    context.read<HomeNotifier>().fetchProducts();
   }
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
     return Consumer<HomeNotifier>(builder: (context, provider, ___) {
       return Scaffold(
         appBar: AppBar(
-          title: Consumer<HomeNotifier>(
-            builder: (context, notifier, child) => Text(notifier.currentUser.username),
-          ),
+          title: Text(localization.home),
           actions: [
             IconButton(
               onPressed: () {
@@ -45,53 +46,50 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   Widget _homeBody(HomeNotifier provider) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      padding: const EdgeInsets.all(12),
-      itemCount: 4,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {},
-          child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            child: ListTile(
-              leading: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey.shade200,
-                    ),
-                  ),
-                  Positioned(
-                    right: 4,
-                    child: Container(
-                      height: 8,
-                      width: 8,
-                      decoration: const BoxDecoration(
-                        color: Colors.green,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              title: const Text(
-                'sdfs',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: const Text('sdfsdf'),
-              trailing: SvgPicture.asset(
-                IconPath.chat,
-                width: 20,
-              ),
-            ),
+    return Column(
+      children: [
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: provider.categoryItem?.map((e) => Chip(label: Text(e.toString()))).toList() ?? [],
           ),
-        );
-      },
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        Expanded(
+          child: GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 9 / 16),
+            padding: const EdgeInsets.all(12),
+            itemCount: provider.items?.length,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) {
+                      return HomeDetail(data: provider.items![index]);
+                    },
+                  ));
+                },
+                child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Image.network(
+                          provider.items?[index].image ?? 'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
+                          width: 50,
+                          height: 50,
+                        ),
+                        Text(provider.items?[index].title ?? 'title'),
+                        Text(provider.items?[index].price.toString() ?? '0.0'),
+                      ]),
+                    )),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

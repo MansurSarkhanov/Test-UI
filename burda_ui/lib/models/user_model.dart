@@ -6,6 +6,16 @@ class UserModel extends Equatable {
 
   const UserModel({required this.password, required this.username});
 
+  UserModel copyWith({
+    final String? password,
+    final String? username,
+  }) {
+    return UserModel(
+      username: username ?? this.username,
+      password: password ?? this.password,
+    );
+  }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       username: json['username'],
